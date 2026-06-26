@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业文献助手 - RAG 学术问答</title>
+    <!-- Markdown 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>📚 专业文献助手</h1>
+            <p class="subtitle">基于 RAG 的学术论文智能问答系统</p>
+            <div class="status-bar">
+                <span class="status-label">状态：</span>
+                <span id="status-indicator" class="status offline"></span>
+                <span id="status-text">知识库未初始化</span>
+                <span class="separator">|</span>
+                <span id="file-count">论文：0</span>
+            </div>
+            <!-- 初始化进度条（默认隐藏） -->
+            <div id="init-progress-bar" class="init-progress-bar" style="display:none">
+                <div class="init-progress-track">
+                    <div id="init-progress-fill" class="init-progress-fill" style="width:0%"></div>
+                </div>
+                <span id="init-progress-text" class="init-progress-text">准备中...</span>
+            </div>
+        </header>
+
+        <!-- 聊天区域 -->
+        <main class="chat-container">
+            <div id="chat-messages" class="chat-messages">
+                <!-- 由 JavaScript 动态渲染 -->
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <div class="toolbar-row">
+                    <button id="init-btn" class="btn btn-init">📚 初始化知识库</button>
+                    <label for="file-upload" class="btn btn-upload">📎 上传论文</label>
+                    <input type="file" id="file-upload" accept=".pdf,.txt" hidden>
+                </div>
+                <div class="input-row">
+                    <input
+                        type="text"
+                        id="question-input"
+                        placeholder="输入你的问题..."
+                        disabled
+                        autocomplete="off"
+                        maxlength="2000"
+                    />
+                    <button id="send-btn" class="btn btn-send" disabled>发送</button>
+                </div>
+                <p class="hint">
+                    💡 将 PDF/TXT 放入 <code>papers</code> 文件夹后初始化；
+                    也可点击「上传论文」直接提问
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
